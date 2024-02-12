@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "PlaneSeatsCalculator.ConsoleApp": {
+      "commandName": "Project",
+      "commandLineArgs": "A380\r\n732\r\n732\r\n244"
+    }
+  }
+}
