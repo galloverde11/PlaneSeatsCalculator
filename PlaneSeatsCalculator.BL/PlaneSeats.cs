@@ -1,4 +1,4 @@
-﻿namespace PlaneSeatsCalculator.ConsoleApp;
+﻿namespace PlaneSeatsCalculator.BL;
 
 public class PlaneSeats
 {

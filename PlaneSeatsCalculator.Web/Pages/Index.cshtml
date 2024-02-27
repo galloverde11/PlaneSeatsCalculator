@@ -1,0 +1,72 @@
+﻿@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Home page";
+}
+
+<h3>Calculate seats</h3>
+
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <div class="row">
+                <div class="col-md-6">
+                    <label asp-for="RequestModel.PlaneName" class="control-label"></label>
+                    @* <input asp-for="RequestModel.PlaneName" class="form-control" /> *@
+                    <select asp-for="RequestModel.PlaneName" asp-items="Model.PlaneNames" class="form-control"></select>
+                    <span asp-validation-for="RequestModel.PlaneName" class="text-danger"></span>
+                </div>
+                <div class="col-md-6">
+                    <label asp-for="RequestModel.PlaneCapacity" class="control-label"></label>
+                    <input asp-for="RequestModel.PlaneCapacity" class="form-control" />
+                    <span asp-validation-for="RequestModel.PlaneCapacity" class="text-danger"></span>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label asp-for="RequestModel.DemandY" class="control-label"></label>
+                <input asp-for="RequestModel.DemandY" class="form-control" />
+                <span asp-validation-for="RequestModel.DemandY" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="RequestModel.DemandJ" class="control-label"></label>
+                <input asp-for="RequestModel.DemandJ" class="form-control" />
+                <span asp-validation-for="RequestModel.DemandJ" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="RequestModel.DemandF" class="control-label"></label>
+                <input asp-for="RequestModel.DemandF" class="form-control" />
+                <span asp-validation-for="RequestModel.DemandF" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="RequestModel" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div style="@(Model.RequestModel != null ? "display:block" : "display:none")">
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.RequestModel.SeatsY)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.RequestModel.SeatsY)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.RequestModel.SeatsJ)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.RequestModel.SeatsJ)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.RequestModel.SeatsF)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.RequestModel.SeatsF)
+        </dd>
+    </dl>
+</div>

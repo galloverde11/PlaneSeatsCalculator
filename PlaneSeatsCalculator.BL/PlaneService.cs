@@ -1,9 +1,14 @@
-﻿namespace PlaneSeatsCalculator.ConsoleApp;
+﻿namespace PlaneSeatsCalculator.BL;
 
 public class PlaneService
 {
-    public static PlaneSeats CalcSeats(int capacity, PlaneSeats demands)
+    private static float CoeffJ { get; set; }
+    private static float CoeffF { get; set; }
+
+    public static PlaneSeats CalcSeats(int capacity, PlaneSeats demands, GameType game)
     {
+        CoeffJ = game == GameType.Mana4 ? 2 : 1.8f;
+        CoeffF = game == GameType.Mana4 ? 3 : 4.2f;
         var res = new PlaneSeats();
         var possibleConfigurations = GetAllSeatConfigurations(capacity);
         float discrepancy = float.MaxValue;
@@ -26,15 +31,16 @@ public class PlaneService
 
         return res;
     }
-    public static List<PlaneSeats> GetAllSeatConfigurations(int capacity)
+
+    private static List<PlaneSeats> GetAllSeatConfigurations(int capacity)
     {
         List<PlaneSeats> configurations = new List<PlaneSeats>();
 
-        for (int seatsF = 0; seatsF <= capacity / 3; seatsF++)
+        for (int seatsF = 0; seatsF <= capacity / CoeffF; seatsF++)
         {
-            for (int seatsJ = 0; seatsJ <= (capacity - seatsF * 3)/2; seatsJ++)
+            for (int seatsJ = 0; seatsJ <= (capacity - seatsF * 3)/ CoeffJ; seatsJ++)
             {
-                int seatsY = capacity - seatsJ * 2 - seatsF * 3;
+                int seatsY = (int)(capacity - seatsJ * CoeffJ - seatsF * CoeffF);
                 configurations.Add(new PlaneSeats { SeatsY = seatsY, SeatsJ = seatsJ, SeatsF = seatsF });
             }
         }

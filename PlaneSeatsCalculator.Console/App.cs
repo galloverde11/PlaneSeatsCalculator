@@ -1,5 +1,6 @@
 ﻿using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
+using PlaneSeatsCalculator.BL;
 using System.CommandLine;
 
 namespace PlaneSeatsCalculator.ConsoleApp
@@ -33,9 +34,9 @@ namespace PlaneSeatsCalculator.ConsoleApp
         private async Task Execute(string namePlane, int demandY, int demandJ, int demandF)
         {
             _logger.LogInformation("Starting...");
-            var capacity = _appConfig.PlaneConfigs.FirstOrDefault(pc=>pc.Name == namePlane).Capacity;
+            var plane = _appConfig.PlaneConfigs!.FirstOrDefault(pc => pc.Name == namePlane)!;
             var demands = new PlaneSeats { SeatsY = demandY, SeatsJ = demandJ, SeatsF = demandF };
-            var planeSeats = PlaneService.CalcSeats(capacity, demands);
+            var planeSeats = PlaneService.CalcSeats(plane.Capacity, demands, plane.Game);
 
             Console.WriteLine(planeSeats);
 
